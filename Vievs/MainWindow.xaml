@@ -6,7 +6,33 @@
         xmlns:local="clr-namespace:KOLHOZ_Marker"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid ShowGridLines="True">
+        <Grid.Resources>
+            <!--Кисті-->
+            <SolidColorBrush  x:Key="DarkBrsh" Color="#202225"/>
+            <SolidColorBrush  x:Key="MidBrsh" Color="#2f3136"/>
+            <SolidColorBrush  x:Key="LightBrsh" Color="#36393f"/>
+            <SolidColorBrush  x:Key="ExtraLightBrsh" Color="#3e4147"/>
+
+            <!--Кнопки-->
+            <Image x:Key="Cog" Source="pack://application:,,,/Resourses\Cog.png"/>
+            <Image x:Key="Stats" Source="pack://application:,,,/Resourses\Add.png"/>
+            
+        </Grid.Resources>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+
+        <!--Фон-->
+        <Rectangle Fill="{StaticResource DarkBrsh}" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
+        <Rectangle Fill="{StaticResource MidBrsh}" IsHitTestVisible="False" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"/>
+        
         
     </Grid>
 </Window>
