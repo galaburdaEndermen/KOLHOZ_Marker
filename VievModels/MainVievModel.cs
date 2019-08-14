@@ -17,11 +17,18 @@ namespace KOLHOZ_Marker.VievModels
             Marks.Add(new MarkModel());
             Marks.Add(new MarkModel());
             Marks.Add(new MarkModel());
+
+            Tags = new ObservableCollection<TagModel>();
+            Tags.Add(new TagModel());
+            Tags.Add(new TagModel());
+            Tags.Add(new TagModel());
+
             //var uri = new Uri(@"pack://application:,,,/Resourses\Cog.png");
             //var bitmap = new BitmapImage(uri);
         }
 
 
         public ObservableCollection<MarkModel> Marks { get; set; }
+        public ObservableCollection<TagModel> Tags { get; set; }
     }
 }
