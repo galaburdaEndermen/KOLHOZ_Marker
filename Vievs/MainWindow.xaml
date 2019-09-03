@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        
         xmlns:local="clr-namespace:KOLHOZ_Marker"
-        mc:Ignorable="d"
+        
         Title="MainWindow" Height="450" Width="800" 
         Loaded="Window_Loaded">
     <Grid ShowGridLines="True">
@@ -540,7 +541,7 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Button Grid.Column="1" Click="btn_Click" Height="56" Width="56" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0" Style="{StaticResource ControllButtonStyle}" Content="{StaticResource Filtr}"></Button>
-            <TextBox Style="{StaticResource SearchField}" ></TextBox>
+            <TextBox Style="{StaticResource SearchField}" Text="{Binding FilterText}" ></TextBox>
         </StackPanel>
 
         <!--<Expander Grid.Row="0" Grid.Column="1" Style="{StaticResource MyCoolExpanderStyle}" Margin="10">

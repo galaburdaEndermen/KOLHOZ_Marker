@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media;
 
 namespace KOLHOZ_Marker.Models
 {
     class TagModel
     {
-        public TagModel()
+        public string TagName { get; set; }
+        public bool IsCheked { get; set; }
+
+        public TagModel(string s)
         {
-            TagColor = new SolidColorBrush((Color.FromRgb(221, 35, 35)));
-            TagName = "test";
+            TagName = s;
         }
 
-        public SolidColorBrush TagColor { get; set; }
-        public string TagName { get; set; }
+        public override int GetHashCode()
+        {
+            return TagName.GetHashCode();
+        }
     }
 }
