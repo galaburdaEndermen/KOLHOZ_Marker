@@ -14,6 +14,7 @@ namespace KOLHOZ_Marker.Models
         public TagModel(string s)
         {
             TagName = s;
+            IsCheked = false;
         }
 
         public override int GetHashCode()

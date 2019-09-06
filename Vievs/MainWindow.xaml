@@ -8,7 +8,7 @@
         
         Title="MainWindow" Height="450" Width="800" 
         Loaded="Window_Loaded">
-    <Grid ShowGridLines="True">
+    <Grid ShowGridLines="False">
         <Grid.Resources>
             <!--Кисті-->
             <SolidColorBrush  x:Key="DarkBrsh" Color="#202225"/>
@@ -541,7 +541,7 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Button Grid.Column="1" Click="btn_Click" Height="56" Width="56" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0" Style="{StaticResource ControllButtonStyle}" Content="{StaticResource Filtr}"></Button>
-            <TextBox Style="{StaticResource SearchField}" Text="{Binding FilterText}" ></TextBox>
+            <TextBox Style="{StaticResource SearchField}" Text="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
         </StackPanel>
 
         <!--<Expander Grid.Row="0" Grid.Column="1" Style="{StaticResource MyCoolExpanderStyle}" Margin="10">
@@ -674,7 +674,7 @@
                     </ListBox.ItemsPanel>
                     <ListBox.ItemTemplate>
                         <DataTemplate >
-                            <CheckBox Content="{Binding TagName}"  Style="{StaticResource TagFiltrStyle}"></CheckBox>
+                            <CheckBox Content="{Binding TagName}" IsChecked="{Binding IsCheked, Mode=TwoWay}"  Style="{StaticResource TagFiltrStyle}"></CheckBox>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

@@ -38,6 +38,7 @@ namespace KOLHOZ_Marker
                 da.Duration = TimeSpan.FromSeconds(0);
                 brd.BeginAnimation(Border.HeightProperty, da);
                 IsToggle = true;
+                (DataContext as VievModels.MainVievModel).IsFiltering = true;
             }
             else
             {
@@ -45,6 +46,7 @@ namespace KOLHOZ_Marker
                 da.Duration = TimeSpan.FromSeconds(0);
                 brd.BeginAnimation(Border.HeightProperty, da);
                 IsToggle = false;
+                (DataContext as VievModels.MainVievModel).IsFiltering = true;
             }
         }
 
