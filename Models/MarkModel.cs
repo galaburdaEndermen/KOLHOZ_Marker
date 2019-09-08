@@ -14,10 +14,6 @@ namespace KOLHOZ_Marker.Models
 
         public MarkModel(ObservableCollection<TagModel> Tags)
         {
-            //Icon = new Image();
-            //var uri = new Uri(@"pack://application:,,,/Resourses\WhiteTest.png");
-            //var bitmap = new BitmapImage(uri);
-            //Icon.Source = bitmap;
             Icon = @"pack://application:,,,/Resourses\WhiteTest.png";
             Title = "test";
 
@@ -52,7 +48,6 @@ namespace KOLHOZ_Marker.Models
             }
         }
 
-        //public Image Icon { get; set; }
         public string Icon { get; set; }
         public string Title { get; set; }
         public ObservableCollection<TagModel> Tags { get; set; }
@@ -70,7 +65,5 @@ namespace KOLHOZ_Marker.Models
             }
             return toReturn;
         }
-
-
     }
 }

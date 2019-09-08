@@ -64,7 +64,6 @@ namespace KOLHOZ_Marker.VievModels
                             return marks;
                         }
                     }
-                    
                 }
                 else
                 {
@@ -91,25 +90,16 @@ namespace KOLHOZ_Marker.VievModels
         public ObservableCollection<TagModel> tags;
 
         public ObservableCollection<TagModel> Tags
-
         {
             get
             {
-                //return new ObservableCollection<TagModel>((from item in tags select item.Value).ToList());
-                //var toReturn = new ObservableCollection<TagModel>((from item in tags select item.Value).ToList());
-                //toReturn.Col
-
                 return tags;
-
             }
             set
             {
-                //tags = value.ToDictionary( t => t.GetHashCode());
-                //RaisePropertyChanged("Tags");
                 tags = value;
             }
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void RaisePropertyChanged(string propertyName)
@@ -120,6 +110,5 @@ namespace KOLHOZ_Marker.VievModels
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
     }
 }
