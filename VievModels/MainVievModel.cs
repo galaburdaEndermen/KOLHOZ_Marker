@@ -26,20 +26,13 @@ namespace KOLHOZ_Marker.VievModels
             Marks.Add(new MarkModel(Tags));
             Marks.Add(new MarkModel(Tags));
 
-            //Tags.CollectionChanged += (sender, e) => { RaisePropertyChanged("Marks"); };
-            //Tags.CollectionChanged += Tags_CollectionChanged;
-
-          
-
             isFiltering = false;
-
-            //var uri = new Uri(@"pack://application:,,,/Resourses\Cog.png");
-            //var bitmap = new BitmapImage(uri);
+            
         }
 
         
 
-        private void Tags_CollectionChanged()
+        private void Tags_CollectionChanged() // на лямбду помінять?
         {
             RaisePropertyChanged("Marks");
         }

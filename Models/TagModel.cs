@@ -9,6 +9,7 @@ namespace KOLHOZ_Marker.Models
     class TagModel
     {
         public string TagName { get; set; }
+
         private bool isCheked;
         public bool IsCheked
         {
@@ -20,8 +21,7 @@ namespace KOLHOZ_Marker.Models
         {
             Checked = h;
             TagName = s;
-            IsCheked = false;
-            
+            IsCheked = false; 
         }
 
         public TagModel(TagModel another) // copy
