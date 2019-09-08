@@ -34,7 +34,7 @@ namespace KOLHOZ_Marker.Models
                 ObservableCollection<TagModel> tmp = new ObservableCollection<TagModel>();
                 for (int i = 0; i < Tags.Count; i++)
                 {
-                    tmp.Add(Tags[i]);
+                    tmp.Add(new TagModel(Tags[i]));
                     if(SelectedTags.Count > i)// провіряю, чи є такий індекс в SelectedTags
                     {
                         if(SelectedTags[i].IsCheked)

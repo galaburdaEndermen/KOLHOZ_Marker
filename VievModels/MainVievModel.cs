@@ -15,16 +15,21 @@ namespace KOLHOZ_Marker.VievModels
     {
         public MainVievModel()
         {
-            tags = new Dictionary<int, TagModel>();
-            tags.Add("test1".GetHashCode(), new TagModel("test1"));
-            tags.Add("test2".GetHashCode(), new TagModel("test2"));
-            tags.Add("test3".GetHashCode(), new TagModel("test3"));
-            tags.Add("test4".GetHashCode(), new TagModel("test4"));
+            tags = new ObservableCollection<TagModel>();
+            tags.Add(new TagModel("test1", Tags_CollectionChanged));
+            tags.Add(new TagModel("test2", Tags_CollectionChanged));
+            tags.Add(new TagModel("test3", Tags_CollectionChanged));
+            tags.Add(new TagModel("test4", Tags_CollectionChanged));
 
             Marks = new ObservableCollection<MarkModel>();
             Marks.Add(new MarkModel(Tags));
             Marks.Add(new MarkModel(Tags));
             Marks.Add(new MarkModel(Tags));
+
+            //Tags.CollectionChanged += (sender, e) => { RaisePropertyChanged("Marks"); };
+            //Tags.CollectionChanged += Tags_CollectionChanged;
+
+          
 
             isFiltering = false;
 
@@ -32,9 +37,15 @@ namespace KOLHOZ_Marker.VievModels
             //var bitmap = new BitmapImage(uri);
         }
 
+        
+
+        private void Tags_CollectionChanged()
+        {
+            RaisePropertyChanged("Marks");
+        }
 
         private ObservableCollection<MarkModel> marks;
-        public ObservableCollection<MarkModel> Marks //зробить фільтрацію лінгом
+        public ObservableCollection<MarkModel> Marks 
         {
             get
             {
@@ -43,7 +54,7 @@ namespace KOLHOZ_Marker.VievModels
                     bool isTagsCheked = false;
                     foreach(var t in tags)
                     {
-                        if (t.Value.IsCheked) { isTagsCheked = true; }
+                        if (t.IsCheked) { isTagsCheked = true; }
                     }
                     if(isTagsCheked)
                     {
@@ -51,7 +62,14 @@ namespace KOLHOZ_Marker.VievModels
                     }
                     else
                     {
-                        return new ObservableCollection<MarkModel>((from item in marks where item.Title.Contains(FilterText) select item).ToList());
+                        if((FilterText != "") && (FilterText != null))
+                        {
+                            return new ObservableCollection<MarkModel>((from item in marks where item.Title.Contains(FilterText) select item).ToList());
+                        }
+                        else
+                        {
+                            return marks;
+                        }
                     }
                     
                 }
@@ -77,18 +95,25 @@ namespace KOLHOZ_Marker.VievModels
             set { isFiltering = value;  }
         }
       
-        public Dictionary<int, TagModel> tags;
+        public ObservableCollection<TagModel> tags;
 
         public ObservableCollection<TagModel> Tags
 
         {
             get
             {
-                return new ObservableCollection<TagModel>((from item in tags select item.Value).ToList());
+                //return new ObservableCollection<TagModel>((from item in tags select item.Value).ToList());
+                //var toReturn = new ObservableCollection<TagModel>((from item in tags select item.Value).ToList());
+                //toReturn.Col
+
+                return tags;
+
             }
             set
             {
-                tags = value.ToDictionary( t => t.GetHashCode());
+                //tags = value.ToDictionary( t => t.GetHashCode());
+                //RaisePropertyChanged("Tags");
+                tags = value;
             }
         }
 
@@ -102,5 +127,6 @@ namespace KOLHOZ_Marker.VievModels
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
     }
 }

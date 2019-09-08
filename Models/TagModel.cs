@@ -9,11 +9,26 @@ namespace KOLHOZ_Marker.Models
     class TagModel
     {
         public string TagName { get; set; }
-        public bool IsCheked { get; set; }
-
-        public TagModel(string s)
+        private bool isCheked;
+        public bool IsCheked
         {
+            get { return isCheked; }
+            set { isCheked = value; Checked(); }
+        }
+
+        public TagModel(string s, TagStateHandler h)
+        {
+            Checked = h;
             TagName = s;
+            IsCheked = false;
+            
+        }
+
+        public TagModel(TagModel another) // copy
+        {
+            this.Checked = another.Checked;
+            this.TagName = another.TagName;
+           
             IsCheked = false;
         }
 
@@ -21,5 +36,8 @@ namespace KOLHOZ_Marker.Models
         {
             return TagName.GetHashCode();
         }
+
+        public delegate void TagStateHandler();
+        public event TagStateHandler Checked;
     }
 }
