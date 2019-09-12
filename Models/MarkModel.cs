@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using KOLHOZ_Marker.Models;
 
 namespace KOLHOZ_Marker.Models
 {
@@ -21,6 +22,9 @@ namespace KOLHOZ_Marker.Models
             SelectedTags = new ObservableCollection<TagModel>();
             Tags_CollectionChanged(null, null);
             this.Tags.CollectionChanged += Tags_CollectionChanged;
+
+            openCommand = new Command(OpenPage);
+            editCommand = new Command(editTags);
         }
 
         private void Tags_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -65,5 +69,30 @@ namespace KOLHOZ_Marker.Models
             }
             return toReturn;
         }
+
+
+
+        private Command openCommand;
+        public Command Open { get { return openCommand; } }
+        void OpenPage(object o)
+        {
+            //System.Diagnostics.Process.Start("http://www.webpage.com");
+        }
+
+        private Command editCommand;
+        public Command EditTags { get { return editCommand; } }
+        void editTags(object o)
+        {
+
+        }
+
+
+        public string toString { get { return this.ToString(); } }
+
+
+        //public override string ToString()
+        //{
+        //    //return 
+        //}
     }
 }

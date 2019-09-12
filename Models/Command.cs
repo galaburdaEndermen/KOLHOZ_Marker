@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace GAS_timer_mvvm.Models
+namespace KOLHOZ_Marker.Models
 {
     public class Command : ICommand
     {

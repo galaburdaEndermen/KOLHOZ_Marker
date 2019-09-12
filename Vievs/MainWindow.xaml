@@ -469,14 +469,21 @@
                 <Setter Property="ContextMenu">
                     <Setter.Value>
                         <ContextMenu FontFamily="Calibri" BorderBrush="{StaticResource MidBrsh}" Style="{StaticResource ContextMenuStyle}">
-                            <MenuItem Header="Скрыть имена" Style="{StaticResource MenuItemStyle}"/>
-                            <MenuItem Header="Настроить канал" Style="{StaticResource MenuItemStyle}"/>
+
+                            <MenuItem Header="Tags" Style="{StaticResource MenuItemStyle}" Command="{Binding EditTags}"/>
+
                             <Separator Style="{StaticResource MenuSeparatorStyle}"/>
-                            <MenuItem Header="Экспресс-приглашение" Style="{StaticResource MenuItemStyle}"/>
-                            <MenuItem Header="Клонировать канал" Style="{StaticResource MenuItemStyle}"/>
-                            <MenuItem Header="Создать голосовой канал" Style="{StaticResource MenuItemStyle}"/>
+
+                            <MenuItem Header="Open" Style="{StaticResource MenuItemStyle}" Command="{Binding Open}"/>
+                            <!--<MenuItem Header="Клонировать канал" Style="{StaticResource MenuItemStyle}"/>
+                            <MenuItem Header="Создать голосовой канал" Style="{StaticResource MenuItemStyle}"/>-->
+                            
                             <Separator Style="{StaticResource MenuSeparatorStyle}" />
-                            <MenuItem Header="Удалить канал" Foreground="#FFC83232" Style="{StaticResource MenuItemStyle}"/>
+                            
+                            <MenuItem Header="Delete" Foreground="#FFC83232" Style="{StaticResource MenuItemStyle}"
+                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}, AncestorLevel=2},Path=DataContext.Delete}" CommandParameter="{Binding toString}"/>
+                            />
+                            
                         </ContextMenu>
                         
                     </Setter.Value>
