@@ -55,9 +55,10 @@ namespace KOLHOZ_Marker
             brd.Height = 0;
         }
 
-        private void Btn_Click_1(object sender, RoutedEventArgs e)
+    
+        public void OnContextMenuOpened(object sender, RoutedEventArgs args)
         {
-
+            (sender as ContextMenu).DataContext = (this.DataContext as VievModels.MainVievModel).Marks;
         }
     }
 }

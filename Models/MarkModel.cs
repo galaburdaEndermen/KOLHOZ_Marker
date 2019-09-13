@@ -17,6 +17,7 @@ namespace KOLHOZ_Marker.Models
         {
             Icon = @"pack://application:,,,/Resourses\WhiteTest.png";
             Title = "test";
+            Href = @"https://www.google.com.ua";
 
             this.Tags = Tags;
             SelectedTags = new ObservableCollection<TagModel>();
@@ -54,6 +55,7 @@ namespace KOLHOZ_Marker.Models
 
         public string Icon { get; set; }
         public string Title { get; set; }
+        public string Href { get; set; }
         public ObservableCollection<TagModel> Tags { get; set; }
         public ObservableCollection<TagModel> SelectedTags { get; set; }
 
@@ -76,7 +78,7 @@ namespace KOLHOZ_Marker.Models
         public Command Open { get { return openCommand; } }
         void OpenPage(object o)
         {
-            //System.Diagnostics.Process.Start("http://www.webpage.com");
+            System.Diagnostics.Process.Start(Href);
         }
 
         private Command editCommand;
@@ -90,9 +92,9 @@ namespace KOLHOZ_Marker.Models
         public string toString { get { return this.ToString(); } }
 
 
-        //public override string ToString()
-        //{
-        //    //return 
-        //}
+        public override string ToString()
+        {
+            return Title + Href;
+        }
     }
 }
