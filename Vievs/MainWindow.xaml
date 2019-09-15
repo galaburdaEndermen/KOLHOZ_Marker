@@ -478,7 +478,7 @@
                 <Separator Style="{StaticResource MenuSeparatorStyle}" />
 
                 <MenuItem Header="Delete" Foreground="#FFC83232" Style="{StaticResource MenuItemStyle}"
-                            Command="{Binding Delete}"/>
+                            Command="{Binding Delete}" CommandParameter="{Binding toString}"/>
                 
             </ContextMenu>
 
@@ -491,7 +491,7 @@
                 <Setter Property="Cursor" Value="Hand"></Setter>
                 <Setter Property="ContextMenu" Value="{StaticResource ButtonContextMenu}"></Setter>
                 <!--<Setter Property="Tag" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}"></Setter>-->
-                <Setter Property="Tag" Value="{Binding DataContext,ElementName=Tags}"></Setter>
+                <!--<Setter Property="Tag" Value="{Binding DataContext,ElementName=Tags}"></Setter>-->
                
 
 

@@ -13,19 +13,21 @@ namespace KOLHOZ_Marker.Models
     class MarkModel
     {
 
-        public MarkModel(ObservableCollection<TagModel> Tags)
+        public MarkModel(ObservableCollection<TagModel> Tags, ObservableCollection<MarkModel> Marks)
         {
             Icon = @"pack://application:,,,/Resourses\WhiteTest.png";
             Title = "test";
             Href = @"https://www.google.com.ua";
 
             this.Tags = Tags;
+            this.marks = Marks;
             SelectedTags = new ObservableCollection<TagModel>();
             Tags_CollectionChanged(null, null);
             this.Tags.CollectionChanged += Tags_CollectionChanged;
 
             openCommand = new Command(OpenPage);
             editCommand = new Command(editTags);
+            delete = new Command(deleteMark);
         }
 
         private void Tags_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -58,6 +60,7 @@ namespace KOLHOZ_Marker.Models
         public string Href { get; set; }
         public ObservableCollection<TagModel> Tags { get; set; }
         public ObservableCollection<TagModel> SelectedTags { get; set; }
+        private ObservableCollection<MarkModel> marks;
 
         public bool isAppropriate()
         {
@@ -85,6 +88,28 @@ namespace KOLHOZ_Marker.Models
         public Command EditTags { get { return editCommand; } }
         void editTags(object o)
         {
+
+        }
+
+        private Command delete;
+        public Command Delete { get { return delete; } }
+        private void deleteMark(object parameter)
+        {
+            string parName = parameter as string;
+            if (parName != null)
+            {
+                for (int i = 0; i < marks.Count;)
+                {
+                    if (marks[i].ToString() == parName)
+                    {
+                        marks.RemoveAt(i);
+                    }
+                    else
+                    {
+                        i++;
+                    }
+                }
+            }
 
         }
 
