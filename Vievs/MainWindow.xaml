@@ -20,69 +20,10 @@
             <Image x:Key="Cog" Source="pack://application:,,,/Resourses\Cog.png"/>
             <Image x:Key="Add" Source="pack://application:,,,/Resourses\Add.png"/>
             <Image x:Key="Filtr" Source="pack://application:,,,/Resourses\Filtr.png"/>
+            
             <DataTemplate x:Key="Context">
                 <Image Source="pack://application:,,,/Resourses\Context.png" />
             </DataTemplate>
-
-           
-
-            <!--<Style x:Key="ExpanderHeaderFocusVisual">
-                <Setter Property="Control.Template">
-                    <Setter.Value>
-                        <ControlTemplate>
-                            <Border>
-                                <Rectangle Margin="0" SnapsToDevicePixels="true" Stroke="Black" StrokeThickness="1" StrokeDashArray="1 2"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <Style x:Key="ExpanderDownHeaderStyle" TargetType="{x:Type ToggleButton}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type ToggleButton}">
-                            <Border Padding="{TemplateBinding Padding}" Background="Transparent">
-                                <ContentPresenter HorizontalAlignment="Left" RecognizesAccessKey="True" VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            
-            <Style x:Key="ExpanderStyle" TargetType="{x:Type Expander}">
-                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"/>
-                <Setter Property="Background" Value="Coral"/>
-                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                <Setter Property="BorderBrush" Value="Transparent"/>
-                <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type Expander}">
-                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
-                                <DockPanel>
-                                    <ToggleButton x:Name="HeaderSite" ContentTemplate="{TemplateBinding HeaderTemplate}" ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}" Content="{TemplateBinding Header}" DockPanel.Dock="Top" Foreground="{TemplateBinding Foreground}" FontWeight="{TemplateBinding FontWeight}" FocusVisualStyle="{StaticResource ExpanderHeaderFocusVisual}" FontStyle="{TemplateBinding FontStyle}" FontStretch="{TemplateBinding FontStretch}" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Margin="1" MinWidth="0" MinHeight="0" Padding="{TemplateBinding Padding}" Style="{StaticResource ExpanderDownHeaderStyle}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                    <Grid Background="Black" x:Name="ExpandSite" DockPanel.Dock="Bottom" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Visibility="Collapsed" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                                        <Canvas>
-                                            <Path Data="M 20,0 L 50,0 L35,10 z" StrokeThickness="0" Fill="{TemplateBinding Background}" Stretch="None"/>
-                                        </Canvas>
-                                        <ContentPresenter Focusable="false"/>
-                                    </Grid>
-                                </DockPanel>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsExpanded" Value="true">
-                                    <Setter Property="Visibility" TargetName="ExpandSite" Value="Visible"/>
-                                </Trigger>
-                                <Trigger Property="IsEnabled" Value="false">
-                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>-->
-
 
             <Style x:Key="ExpanderHeaderFocusVisual">
                 <Setter Property="Control.Template">
@@ -459,11 +400,10 @@
                                 </Border>
                             </Grid>
                         </ControlTemplate>
-                    </Setter.Value> 
+                    </Setter.Value>
                 </Setter>
             </Style>
 
-           
             <ContextMenu x:Key="ButtonContextMenu" 
                          FontFamily="Calibri" BorderBrush="{StaticResource MidBrsh}" Style="{StaticResource ContextMenuStyle}" Opened="OnContextMenuOpened">
                 
@@ -472,9 +412,7 @@
                 <Separator Style="{StaticResource MenuSeparatorStyle}"/>
 
                 <MenuItem Header="Open" Style="{StaticResource MenuItemStyle}" Command="{Binding Open}"/>
-                <!--<MenuItem Header="Клонировать канал" Style="{StaticResource MenuItemStyle}"/>
-                            <MenuItem Header="Создать голосовой канал" Style="{StaticResource MenuItemStyle}"/>-->
-
+           
                 <Separator Style="{StaticResource MenuSeparatorStyle}" />
 
                 <MenuItem Header="Delete" Foreground="#FFC83232" Style="{StaticResource MenuItemStyle}"
@@ -482,18 +420,12 @@
                 
             </ContextMenu>
 
-            
-            
             <Style x:Key="ContextMenuButtonStyle" TargetType="Button">
                 <Setter Property="Background" Value="Transparent"></Setter>
                 <Setter Property="ContentTemplate" Value="{StaticResource Context}"></Setter>
 
                 <Setter Property="Cursor" Value="Hand"></Setter>
                 <Setter Property="ContextMenu" Value="{StaticResource ButtonContextMenu}"></Setter>
-                <!--<Setter Property="Tag" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}"></Setter>-->
-                <!--<Setter Property="Tag" Value="{Binding DataContext,ElementName=Tags}"></Setter>-->
-               
-
 
                 <Setter Property="Template">
                     <Setter.Value>
@@ -523,7 +455,6 @@
                                     </EventTrigger.Actions>
                                 </EventTrigger>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <!--<Setter Property="Background" Value="{StaticResource LightBrsh}"></Setter>-->
                                 </Trigger>
                                 <Trigger Property="IsPressed" Value="True">
                                 </Trigger>
@@ -534,7 +465,6 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-
 
         </Grid.Resources>
 
@@ -557,30 +487,6 @@
             <TextBox Style="{StaticResource SearchField}" Text="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
         </StackPanel>
 
-        <!--<Expander Grid.Row="0" Grid.Column="1" Style="{StaticResource MyCoolExpanderStyle}" Margin="10">
-            <Expander.Header>
-                <TextBlock Text="SAS"></TextBlock>
-            </Expander.Header>
-            <StackPanel>
-                <TextBlock>Выберите технологию</TextBlock>
-                <CheckBox>WinForms</CheckBox>
-                <CheckBox>WPF</CheckBox>
-                <CheckBox>ASP.NET</CheckBox>
-            </StackPanel>
-        </Expander>-->
-
-
-       
-
-        <!--<Expander Grid.Row="0" Grid.Column="1" Style="{StaticResource ExpanderStyle}" >
-            <WrapPanel>
-                <CheckBox></CheckBox>
-                <CheckBox></CheckBox>
-                <CheckBox></CheckBox>
-            </WrapPanel>
-        </Expander>
-        <ToggleButton x:Name="HeaderSite" FocusVisualStyle="{StaticResource ExpanderHeaderFocusVisual}" Grid.Row="0" Grid.Column="1"/>-->
-       
         <ListBox HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Stretch" Grid.Column="2" Grid.Row="1" Background="{StaticResource MidBrsh}" BorderBrush="{StaticResource MidBrsh}">
             <!--стіль, шоб не виділялось при наведенні-->
             <ListBox.ItemContainerStyle>
@@ -617,36 +523,10 @@
             
             <Border BorderBrush="Transparent" CornerRadius="10,10,10,10" BorderThickness="1" Name="brd"
                 Canvas.Top="{Binding ElementName=btn, Path=ActualHeight}">
-                    <!--<Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <TextBox Margin="5" Padding="5" TextWrapping="Wrap">Какой-то текст</TextBox>
-                        <StackPanel Grid.Column="1">
-                            <Button Margin="5" Padding="5">1 Button</Button>
-                            <Button Margin="5,0,5,5" Padding="5">2 Button</Button>
-                        </StackPanel>
-                    </Grid>-->
-                
-                
-                <!--<WrapPanel Orientation="Vertical" Margin="20 0 0 0">
-
-                    <CheckBox Content="SAS" Foreground="Azure" Margin="0 10 40 0"></CheckBox>
-                    <CheckBox Content="SAS" Foreground="Azure" Margin="0 10 40 0"></CheckBox>
-                    <CheckBox Content="SAS" Foreground="Azure" Margin="0 10 40 0"></CheckBox>
-                    <CheckBox Content="SAS" Foreground="Azure" Margin="0 10 40 0"></CheckBox>
-                    <CheckBox Content="SAS" Foreground="Azure" Margin="0 10 40 0"></CheckBox>
-                    <CheckBox Content="SAS" Foreground="Azure" Margin="0 10 40 0"></CheckBox>
-                    <CheckBox Content="SAS" Foreground="Azure" Margin="0 10 40 0"></CheckBox>
-                    <CheckBox Content="SAS" Foreground="Azure" Margin="0 10 40 0"></CheckBox>
-                    <CheckBox Content="SAS" Foreground="Azure" Margin="0 10 40 0"></CheckBox>
-
-                </WrapPanel>-->
 
                 <ListBox Name="CategoryListBox" Background="Transparent" BorderBrush="Transparent"
          ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding Tags}">
-                    
+
                     <!--стіль, шоб не виділялось при наведенні-->
                     <ListBox.ItemContainerStyle>
                         <Style  TargetType="{x:Type ListBoxItem}">
@@ -679,7 +559,7 @@
                             </Setter>
                         </Style>
                     </ListBox.ItemContainerStyle>
-                    
+
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Vertical"/>
@@ -691,34 +571,6 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-
-
-                <!--<ItemsControl>
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Vertical"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate >
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="70"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="30"/>
-                                </Grid.RowDefinitions>
-                                
-                                <CheckBox Grid.Column="0"></CheckBox>
-                                <TextBlock Grid.Column="1" Text="SAS" Foreground="White"></TextBlock>
-                                
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>-->
-                
-                
             </Border>
 
 
@@ -788,7 +640,6 @@
             
         </ListBox>
         <Button Style="{StaticResource AddButtonStyle}" Content="{StaticResource Add}" Grid.Column ="1" Grid.Row="2"></Button>
-        <!--<Button Style="{StaticResource ControllButtonStyle}" Background="Transparent" Content="{StaticResource Cog}" Grid.Column ="0" Grid.Row="2"></Button>-->
 
     </Grid>
 </Window>

@@ -27,7 +27,6 @@ namespace KOLHOZ_Marker.VievModels
             Marks.Add(new MarkModel(Tags, marks));
 
             isFiltering = false;
-            //delete = new Command(deleteMark);
         }
 
         
@@ -111,23 +110,5 @@ namespace KOLHOZ_Marker.VievModels
             }
         }
 
-
-        //private Command delete;
-        //public Command Delete { get { return delete; } }
-        //private void deleteMark(object parameter)
-        //{
-        //    string parName = parameter as string;
-        //    if (parName != null)
-        //    {
-        //        for (int i = 0; i < tags.Count; i++)
-        //        {
-        //            if (tags[i].ToString() == parName)
-        //            {
-        //                tags.RemoveAt(i);
-        //            }
-        //        }
-        //    }
-
-        //}
     }
 }
