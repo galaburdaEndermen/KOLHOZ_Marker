@@ -417,7 +417,7 @@
 
                     <Separator Style="{StaticResource MenuSeparatorStyle}"/>
 
-                    <MenuItem Header="Open" Style="{StaticResource MenuItemStyle}" Command="{Binding Open}"/>
+                    <MenuItem Header="Open" Style="{StaticResource MenuItemStyle}" Command="{Binding Open}" CommandParameter="{Binding toString}"/>
 
                     <Separator Style="{StaticResource MenuSeparatorStyle}" />
 
@@ -431,7 +431,9 @@
                     <Setter Property="ContentTemplate" Value="{StaticResource Context}"></Setter>
 
                     <Setter Property="Cursor" Value="Hand"></Setter>
-                    <Setter Property="ContextMenu" Value="{StaticResource ButtonContextMenu}"></Setter>
+                    <Setter Property="ContextMenu" Value="{StaticResource ButtonContextMenu}" ></Setter>
+                    
+                    
 
                     <Setter Property="Template">
                         <Setter.Value>
@@ -637,7 +639,7 @@
 
                                 <Image Source="{Binding Icon}" Grid.Column="0" HorizontalAlignment="Center" Stretch="None" Height="16"  Width="16"></Image>
                                 <Button Content="{Binding Title}" Style="{StaticResource TitleButtonStyle}" Grid.Column="1" Command="{Binding Open}"></Button>
-                                <Button Grid.Column="2" Style="{StaticResource ContextMenuButtonStyle}"></Button>
+                                <Button Grid.Column="2" Style="{StaticResource ContextMenuButtonStyle}" Click="Button_Click"></Button>
 
                             </Grid>
                         </DataTemplate>

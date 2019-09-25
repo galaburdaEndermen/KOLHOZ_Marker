@@ -59,7 +59,22 @@ namespace KOLHOZ_Marker
     
         public void OnContextMenuOpened(object sender, RoutedEventArgs args)
         {
-            (sender as ContextMenu).DataContext = (this.DataContext as VievModels.MainVievModel).Marks;
+            (sender as ContextMenu).DataContext = this.DataContext;
+
+            foreach (var item in (sender as ContextMenu).Items)
+            {
+                if (item is MenuItem)
+                {
+                    //set the command target to whatever you like here
+                    (item as MenuItem).CommandParameter = dc;
+                }
+            }
+        }
+
+        string dc;
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            dc = ((sender as Button).DataContext as KOLHOZ_Marker.Models.MarkModel).ToString();
         }
     }
 }

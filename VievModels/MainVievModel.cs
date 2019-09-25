@@ -1,4 +1,5 @@
 ﻿using KOLHOZ_Marker.Models;
+using KOLHOZ_Marker.Vievs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,15 +25,19 @@ namespace KOLHOZ_Marker.VievModels
             tags.Add(new TagModel("test4", Tags_CollectionChanged));
 
             Marks = new ObservableCollection<MarkModel>();
-            Marks.Add(new MarkModel(Tags, marks, main , "1"));
-            Marks.Add(new MarkModel(Tags, marks, main , "2"));
-            Marks.Add(new MarkModel(Tags, marks, main , "3"));
+            Marks.Add(new MarkModel(Tags, marks, "1"));
+            Marks.Add(new MarkModel(Tags, marks, "2"));
+            Marks.Add(new MarkModel(Tags, marks, "3"));
          
             isFiltering = false;
             add_Mark = new Command(addMark);
+
+            openCommand = new Command(OpenPage);
+            editCommand = new Command(editTags);
+            delete = new Command(deleteMark);
         }
 
-        
+
 
         private void Tags_CollectionChanged() // на лямбду помінять?
         {
@@ -126,22 +131,95 @@ namespace KOLHOZ_Marker.VievModels
 
         private Command add_Mark;
         public Command AddMark { get { return add_Mark; } }
-        KOLHOZ_Marker.Vievs.MarkAdding setWindow;
-    
         void addMark(object o)
         {
-            if (setWindow == null)
+            //if (setWindow == null)
+            //{
+            //    setWindow = new KOLHOZ_Marker.Vievs.MarkAdding
+            //    {
+            //        //DataContext = new SettingsVievModel(Timers)
+            //        Owner = main
+            //    };
+            //    setWindow.ShowDialog();
+            //    setWindow = null;
+            //    GC.Collect();
+            //}
+
+            //РЕАЛІЗУВАТЬ
+        }
+
+
+
+
+        private Command openCommand;
+        public Command Open { get { return openCommand; } }
+        void OpenPage(object o)
+        {
+            string parName = o as string;
+            for (int i = 0; i < marks.Count; i++)
             {
-                setWindow = new KOLHOZ_Marker.Vievs.MarkAdding
+                if (marks[i].toString == parName)
                 {
-                    //DataContext = new SettingsVievModel(Timers)
-                    Owner = main
-                };
-                setWindow.ShowDialog();
-                setWindow = null;
-                GC.Collect();
+                    System.Diagnostics.Process.Start(marks[i].Href);
+                    break;
+                }
+            }
+            
+        }
+
+        private Command editCommand;
+        public Command EditTags { get { return editCommand; } }
+        void editTags(object o)
+        {
+
+            string parName = o as string;
+            if (parName != null)
+            {
+                for (int i = 0; i < marks.Count; i++)
+                {
+                    if (marks[i].toString == parName)
+                    {
+                        TagEdit dialog = new TagEdit
+                        {
+                            Owner = main,
+                            WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                            Height = 350,
+                            Width = 400,
+                            ResizeMode = ResizeMode.NoResize,
+                            WindowStyle = WindowStyle.None,
+                            DataContext = new TagEditVievModel(marks[i].SelectedTags)
+
+
+                        };
+                        if (dialog.ShowDialog() == true)
+                        {
+                            marks[i].SelectedTags = (dialog.DataContext as TagEditVievModel).Tags;
+                        }
+                        break;
+                    }
+                }
             }
         }
 
+        private Command delete;
+        public Command Delete { get { return delete; } }
+        private void deleteMark(object parameter)
+        {
+            string parName = parameter as string;
+            if (parName != null)
+            {
+                for (int i = 0; i < marks.Count;)
+                {
+                    if (marks[i].toString == parName)
+                    {
+                        marks.RemoveAt(i);
+                    }
+                    else
+                    {
+                        i++;
+                    }
+                }
+            }
+        }
     }
 }

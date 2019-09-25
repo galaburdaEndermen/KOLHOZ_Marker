@@ -16,7 +16,7 @@ namespace KOLHOZ_Marker.Models
     class MarkModel
     {
 
-        public MarkModel(ObservableCollection<TagModel> Tags, ObservableCollection<MarkModel> Marks, Window main, string title)
+        public MarkModel(ObservableCollection<TagModel> Tags, ObservableCollection<MarkModel> Marks, string title)
         {
             Icon = @"pack://application:,,,/Resourses\WhiteTest.png";
             Title = title;
@@ -27,16 +27,9 @@ namespace KOLHOZ_Marker.Models
             SelectedTags = new ObservableCollection<TagModel>();
             Tags_CollectionChanged(null, null);
             this.Tags.CollectionChanged += Tags_CollectionChanged;
-
-            openCommand = new Command(OpenPage);
-            editCommand = new Command(editTags);
-            delete = new Command(deleteMark);
-
-            Main = main;
+            
         }
-        Window Main;
-
-
+      
         private void Tags_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if(Tags.Count != SelectedTags.Count)
@@ -82,79 +75,7 @@ namespace KOLHOZ_Marker.Models
             return toReturn;
         }
 
-
-
-        private Command openCommand;
-        public Command Open { get { return openCommand; } }
-        void OpenPage(object o)
-        {
-            System.Diagnostics.Process.Start(Href);
-        }
-
-        private Command editCommand;
-        public Command EditTags { get { return editCommand; } }
-        void editTags(object o)
-        {
-
-            string parName = o as string;
-            if (parName != null)
-            {
-                for (int i = 0; i < marks.Count;)
-                {
-                    if (marks[i].Title == parName)
-                    {
-                        TagEdit dialog = new TagEdit
-                        {
-                            Owner = Main,
-                            WindowStartupLocation = WindowStartupLocation.CenterOwner,
-                            Height = 350,
-                            Width = 400,
-                            ResizeMode = ResizeMode.NoResize,
-                            WindowStyle = WindowStyle.None,
-                            DataContext = new TagEditVievModel(marks[i].SelectedTags)
-
-
-                        };
-                        if (dialog.ShowDialog() == true)
-                        {
-                            marks[i].SelectedTags = (dialog.DataContext as TagEditVievModel).Tags;
-                        }
-                        break;
-                    }
-                   
-                }
-            }
-
-
-            
-            
-        }
-
-        private Command delete;
-        public Command Delete { get { return delete; } }
-        private void deleteMark(object parameter)
-        {
-            string parName = parameter as string;
-            if (parName != null)
-            {
-                for (int i = 0; i < marks.Count;)
-                {
-                    if (marks[i].ToString() == parName)
-                    {
-                        marks.RemoveAt(i);
-                    }
-                    else
-                    {
-                        i++;
-                    }
-                }
-            }
-
-        }
-
-
         public string toString { get { return this.ToString(); } }
-
 
         public override string ToString()
         {
