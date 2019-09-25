@@ -13,8 +13,10 @@ namespace KOLHOZ_Marker.VievModels
 {
     class MainVievModel : INotifyPropertyChanged
     {
-        public MainVievModel()
+        public MainVievModel(Window main)
         {
+
+            this.main = main;
             tags = new ObservableCollection<TagModel>();
             tags.Add(new TagModel("test1", Tags_CollectionChanged));
             tags.Add(new TagModel("test2", Tags_CollectionChanged));
@@ -22,11 +24,12 @@ namespace KOLHOZ_Marker.VievModels
             tags.Add(new TagModel("test4", Tags_CollectionChanged));
 
             Marks = new ObservableCollection<MarkModel>();
-            Marks.Add(new MarkModel(Tags, marks));
-            Marks.Add(new MarkModel(Tags, marks));
-            Marks.Add(new MarkModel(Tags, marks));
-
+            Marks.Add(new MarkModel(Tags, marks, main , "1"));
+            Marks.Add(new MarkModel(Tags, marks, main , "2"));
+            Marks.Add(new MarkModel(Tags, marks, main , "3"));
+         
             isFiltering = false;
+            add_Mark = new Command(addMark);
         }
 
         
@@ -50,7 +53,15 @@ namespace KOLHOZ_Marker.VievModels
                     }
                     if(isTagsCheked)
                     {
-                        return new ObservableCollection<MarkModel>((from item in marks where item.isAppropriate() && item.Title.Contains(FilterText) select item).ToList());
+                        if ((FilterText != "") && (FilterText != null))
+                        {
+                            return new ObservableCollection<MarkModel>((from item in marks where item.isAppropriate() && item.Title.Contains(FilterText) select item).ToList());
+                        }
+                        else
+                        {
+                            return new ObservableCollection<MarkModel>((from item in marks where item.isAppropriate() select item).ToList());
+                        }
+                        
                     }
                     else
                     {
@@ -107,6 +118,28 @@ namespace KOLHOZ_Marker.VievModels
             if (handler != null)
             {
                 handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+
+        public Window main;
+
+        private Command add_Mark;
+        public Command AddMark { get { return add_Mark; } }
+        KOLHOZ_Marker.Vievs.MarkAdding setWindow;
+    
+        void addMark(object o)
+        {
+            if (setWindow == null)
+            {
+                setWindow = new KOLHOZ_Marker.Vievs.MarkAdding
+                {
+                    //DataContext = new SettingsVievModel(Timers)
+                    Owner = main
+                };
+                setWindow.ShowDialog();
+                setWindow = null;
+                GC.Collect();
             }
         }
 

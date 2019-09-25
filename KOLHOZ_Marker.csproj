@@ -55,6 +55,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="VievModels\TagEditVievModel.cs" />
+    <Compile Include="Vievs\MarkAdding.xaml.cs">
+      <DependentUpon>MarkAdding.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vievs\TagEdit.xaml.cs">
+      <DependentUpon>TagEdit.xaml</DependentUpon>
+    </Compile>
     <Page Include="Vievs\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -71,6 +78,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Vievs\MarkAdding.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vievs\TagEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

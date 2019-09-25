@@ -4,19 +4,22 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using KOLHOZ_Marker.Models;
+using KOLHOZ_Marker.VievModels;
+using KOLHOZ_Marker.Vievs;
 
 namespace KOLHOZ_Marker.Models
 {
     class MarkModel
     {
 
-        public MarkModel(ObservableCollection<TagModel> Tags, ObservableCollection<MarkModel> Marks)
+        public MarkModel(ObservableCollection<TagModel> Tags, ObservableCollection<MarkModel> Marks, Window main, string title)
         {
             Icon = @"pack://application:,,,/Resourses\WhiteTest.png";
-            Title = "test";
+            Title = title;
             Href = @"https://www.google.com.ua";
 
             this.Tags = Tags;
@@ -28,7 +31,11 @@ namespace KOLHOZ_Marker.Models
             openCommand = new Command(OpenPage);
             editCommand = new Command(editTags);
             delete = new Command(deleteMark);
+
+            Main = main;
         }
+        Window Main;
+
 
         private void Tags_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
@@ -89,6 +96,38 @@ namespace KOLHOZ_Marker.Models
         void editTags(object o)
         {
 
+            string parName = o as string;
+            if (parName != null)
+            {
+                for (int i = 0; i < marks.Count;)
+                {
+                    if (marks[i].Title == parName)
+                    {
+                        TagEdit dialog = new TagEdit
+                        {
+                            Owner = Main,
+                            WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                            Height = 350,
+                            Width = 400,
+                            ResizeMode = ResizeMode.NoResize,
+                            WindowStyle = WindowStyle.None,
+                            DataContext = new TagEditVievModel(marks[i].SelectedTags)
+
+
+                        };
+                        if (dialog.ShowDialog() == true)
+                        {
+                            marks[i].SelectedTags = (dialog.DataContext as TagEditVievModel).Tags;
+                        }
+                        break;
+                    }
+                   
+                }
+            }
+
+
+            
+            
         }
 
         private Command delete;

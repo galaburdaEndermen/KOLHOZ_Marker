@@ -24,7 +24,8 @@ namespace KOLHOZ_Marker
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new VievModels.MainVievModel();
+            this.DataContext = new VievModels.MainVievModel(this);
+            
         }
 
         private bool IsToggle;
