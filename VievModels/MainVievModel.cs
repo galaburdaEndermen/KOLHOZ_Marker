@@ -133,19 +133,24 @@ namespace KOLHOZ_Marker.VievModels
         public Command AddMark { get { return add_Mark; } }
         void addMark(object o)
         {
-            //if (setWindow == null)
-            //{
-            //    setWindow = new KOLHOZ_Marker.Vievs.MarkAdding
-            //    {
-            //        //DataContext = new SettingsVievModel(Timers)
-            //        Owner = main
-            //    };
-            //    setWindow.ShowDialog();
-            //    setWindow = null;
-            //    GC.Collect();
-            //}
+            MarkAdding dialog = new MarkAdding
+            {
+                Owner = main,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                Height = 350,
+                Width = 600,
+                ResizeMode = ResizeMode.NoResize,
+                WindowStyle = WindowStyle.None,
+                DataContext = new MarkAddingVievModel()
 
-            //РЕАЛІЗУВАТЬ
+
+            };
+            if (dialog.ShowDialog() == true)
+            {
+                Models.MarkModel newM = new MarkModel(this.Tags, this.Marks, (dialog.DataContext as MarkAddingVievModel).Title); //переробить від новий конструктор і скоротить
+                marks.Add(newM);
+            }
+            
         }
 
 
