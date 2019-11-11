@@ -155,8 +155,6 @@ namespace KOLHOZ_Marker.VievModels
         }
 
 
-
-
         private Command openCommand;
         public Command Open { get { return openCommand; } }
         void OpenPage(object o)

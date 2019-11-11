@@ -14,25 +14,19 @@ namespace KOLHOZ_Marker.Models
         public HtmlRequester(string url)
         {
             string adress = url;
-            WebRequest.DefaultWebProxy = null;
-           
             Adress = adress;
             string home = Home(adress);
             string res;
+            string iconName = AppDomain.CurrentDomain.BaseDirectory + getFileName(home);
+
+            //якась магія, можна попробувать удалить
+            WebRequest.DefaultWebProxy = null;
             System.Net.ServicePointManager.Expect100Continue = false;
+            //
+
 
             DisableAdapter("Hamachi");
-
-            try
-            {
-                res = getResponse(adress);
-            }
-            catch (Exception e)
-            {
-                string mes = e.ToString();
-                throw;
-            }
-            
+            res = getResponse(adress);
 
             string title = Regex.Match(res, @"\<title\b[^>]*\>\s*(?<Title>[\s\S]*?)\</title\>", RegexOptions.IgnoreCase).Groups["Title"].Value;
 
@@ -40,60 +34,16 @@ namespace KOLHOZ_Marker.Models
             title = Encoding.UTF8.GetString(bytes);
             Title = title;
 
-            if (!(File.Exists(AppDomain.CurrentDomain.BaseDirectory + getFileName(home))))
+            if (!File.Exists(iconName))
             {
                 using (WebClient client = new WebClient())
-
                 {
-                    //client.Proxy = null;
-                    try
-                    {
-                        string one = @"https://www.google.com/s2/favicons?domain=" + home;
-                        string two = AppDomain.CurrentDomain.BaseDirectory + getFileName(home);
-                        //client.DownloadFileAsync(new Uri(one), two);
-                        client.DownloadFile(new Uri(one), two);
-                    }
-                    catch (Exception e)
-                    {
-                        string ms = e.ToString();
-                        throw;
-                    }
-
+                        //client.DownloadFileAsync(new Uri(one), two); //хай буде, вдруг пригодиться
+                        client.DownloadFile(new Uri(@"https://www.google.com/s2/favicons?domain=" + home), iconName);
                 }
             }
-            else
-            {
 
-            }
-
-
-            ///////////////////////
-
-            //HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.google.com/s2/favicons?domain=" + home);
-            //HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-            //Stream stream = resp.GetResponseStream();
-            //FileStream file = new FileStream(AppDomain.CurrentDomain.BaseDirectory + getFileName(home), FileMode.Create, FileAccess.Write);
-            //StreamWriter write = new StreamWriter(file);
-            //int b;
-            //for (int i = 0; ; i++)
-            //{
-            //    b = stream.ReadByte();
-            //    if (b == -1) break;
-            //    write.Write(b);
-            //}
-            //write.Close();
-            //file.Close();
-
-
-
-            //Console.WriteLine("***end***");
-            //Console.ReadKey();
-
-
-            ///////////////////////
-
-            Icon = AppDomain.CurrentDomain.BaseDirectory + getFileName(home);
-
+            Icon = iconName;
 
             //GC.Collect();
         }
@@ -124,8 +74,6 @@ namespace KOLHOZ_Marker.Models
                     result = result.Remove(i, 1);
                 }
             }
-            //result = result.Remove(result.IndexOf("www"), 3);
-            //result = result.Remove(result.IndexOf("com"), 3);
             result += @".ico";
 
 
@@ -173,38 +121,25 @@ namespace KOLHOZ_Marker.Models
             }
             while (count > 0);
             return sb.ToString();
-
-            //WebClient x = new WebClient();
-            ////x.Proxy = null;
-            //string source = x.DownloadString(uri);
-            //return source;
-
         }
 
         public static void DisableAdapter(string interfaceName)
         {
-            try
-            {
-
                 System.Diagnostics.ProcessStartInfo psi =
                     new System.Diagnostics.ProcessStartInfo("netsh", "interface set interface \"" + interfaceName + "\" disable");
                 System.Diagnostics.Process p = new System.Diagnostics.Process();
                 psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                //psi.UseShellExecute = false; //?
-                psi.UseShellExecute = true; //?
+                psi.UseShellExecute = true; 
                 psi.Verb = "runas";
-                //psi.RedirectStandardOutput = true;
-                //psi.RedirectStandardError = true;
                 p.StartInfo = psi;
                 p.Start();
-            }
-            catch (Exception e)
-            {
-                string a = e.ToString();
-                throw;
-            }
         }
-
+        
+        public static bool isExist(string href)
+        {
+            return true;
+        }
+    
 
         public string Adress { get; set; }
         public string Title { get; set; }
