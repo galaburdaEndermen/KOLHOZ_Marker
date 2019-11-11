@@ -148,6 +148,7 @@ namespace KOLHOZ_Marker.VievModels
             if (dialog.ShowDialog() == true)
             {
                 Models.MarkModel newM = new MarkModel(this.Tags, this.Marks, (dialog.DataContext as MarkAddingVievModel).Title); //переробить від новий конструктор і скоротить
+                newM.Icon = (dialog.DataContext as MarkAddingVievModel).Icon;
                 marks.Add(newM);
             }
             
