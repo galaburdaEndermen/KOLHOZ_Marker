@@ -28,5 +28,10 @@ namespace KOLHOZ_Marker.Vievs
         {
             this.DialogResult = true;
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

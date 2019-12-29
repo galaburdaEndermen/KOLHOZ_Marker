@@ -138,7 +138,7 @@ namespace KOLHOZ_Marker.VievModels
                 Owner = main,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
                 Height = 350,
-                Width = 600,
+                Width = 325,
                 ResizeMode = ResizeMode.NoResize,
                 WindowStyle = WindowStyle.None,
                 DataContext = new MarkAddingVievModel()
@@ -149,6 +149,7 @@ namespace KOLHOZ_Marker.VievModels
             {
                 Models.MarkModel newM = new MarkModel(this.Tags, this.Marks, (dialog.DataContext as MarkAddingVievModel).Title); //переробить від новий конструктор і скоротить
                 newM.Icon = (dialog.DataContext as MarkAddingVievModel).Icon;
+                newM.Href = (dialog.DataContext as MarkAddingVievModel).Href;
                 marks.Add(newM);
             }
             

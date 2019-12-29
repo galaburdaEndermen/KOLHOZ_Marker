@@ -22,6 +22,45 @@
             <SolidColorBrush  x:Key="LightBrsh" Color="#36393f"/>
             <SolidColorBrush  x:Key="ExtraLightBrsh" Color="#3e4147"/>
 
+            <Style x:Key="ControllButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="{StaticResource DarkBrsh}"></Setter>
+                <Setter Property="Opacity" Value="0.9"></Setter>
+                <Setter Property="Cursor" Value="Hand"></Setter>
+
+
+                <Setter Property="Template">
+                    <Setter.Value>
+
+                        <ControlTemplate TargetType="Button">
+
+                            <Border 
+                                Name = "Brd" 
+                                CornerRadius="0"
+                                Background="{TemplateBinding Background}">
+                                <ContentPresenter
+                                    Margin="5"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                </ContentPresenter>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="False">
+                                    <Setter Property="Opacity" Value="0.8"></Setter>
+                                    <Setter Property="Background" Value="{StaticResource LightBrsh}"></Setter>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="Opacity" Value="1.0"></Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+
+                        </ControlTemplate>
+
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+
             <Style x:Key="TagFiltrStyle" TargetType="CheckBox">
                 <Setter Property="SnapsToDevicePixels" Value="False" />
 
@@ -181,8 +220,8 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button Click="Accept_Click" Grid.Column="0" Grid.Row="1">OK</Button>
-        <Button IsCancel="True" Grid.Column="1" Grid.Row="1">Отмена</Button>
+        <Button Click="Accept_Click" Grid.Column="0" Grid.Row="1" Style="{StaticResource ControllButtonStyle}">OK</Button>
+        <Button IsCancel="True" Grid.Column="1" Grid.Row="1" Style="{StaticResource ControllButtonStyle}">Отмена</Button>
 
     </Grid>
 </Window>

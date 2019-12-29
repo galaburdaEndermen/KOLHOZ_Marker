@@ -233,7 +233,6 @@
 
                 </Style>
 
-
                 <Style x:Key="ControllButtonStyle" TargetType="Button">
                     <Setter Property="Background" Value="{StaticResource DarkBrsh}"></Setter>
                     <Setter Property="Opacity" Value="0.9"></Setter>
@@ -654,10 +653,5 @@
 
         </Grid>
     </Grid>
-    
-    
-    
-    
-    
     
 </Window>

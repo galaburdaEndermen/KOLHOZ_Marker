@@ -9,6 +9,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 using KOLHOZ_Marker.Models;
 
 namespace KOLHOZ_Marker.VievModels
@@ -20,6 +21,9 @@ namespace KOLHOZ_Marker.VievModels
         {
             icon = @"pack://application:,,,/Resourses\WhiteTest.png";
             Exist = true;
+
+            Href = Clipboard.GetText();
+
         }
 
 
@@ -43,6 +47,7 @@ namespace KOLHOZ_Marker.VievModels
                
                 if (HtmlRequester.isExist(href))
                 {
+                    Exist = true;
                     HtmlRequester request = new HtmlRequester(href);
                     Title = request.Title;
                     Icon = request.Icon;

@@ -76,5 +76,10 @@ namespace KOLHOZ_Marker
         {
             dc = ((sender as Button).DataContext as KOLHOZ_Marker.Models.MarkModel).ToString();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
