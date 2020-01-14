@@ -16,16 +16,13 @@ namespace KOLHOZ_Marker.VievModels
 {
     class MarkAddingVievModel : INotifyPropertyChanged
     {
-
         public MarkAddingVievModel()
         {
             icon = @"pack://application:,,,/Resourses\WhiteTest.png";
             Exist = true;
 
             Href = Clipboard.GetText();
-
         }
-
 
         private string title;
         public string Title { 

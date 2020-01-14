@@ -21,17 +21,11 @@ namespace KOLHOZ_Marker.Models
             string res;
             string iconName = AppDomain.CurrentDomain.BaseDirectory + getFileName(home);
 
-            //якась магія, можна попробувать удалить
-            //WebRequest.DefaultWebProxy = null;
-
-            //DisableAdapter("Hamachi");
-           
             if (!File.Exists(iconName))
             {
                 using (WebClient client = new WebClient())
                 {
-                    client.DownloadFileAsync(new Uri(@"https://www.google.com/s2/favicons?domain=" + home), iconName); //хай буде, вдруг пригодиться
-                    //client.DownloadFile(new Uri(@"https://www.google.com/s2/favicons?domain=" + home), iconName);
+                    client.DownloadFileAsync(new Uri(@"https://www.google.com/s2/favicons?domain=" + home), iconName);
                 }
             }
 
@@ -40,12 +34,8 @@ namespace KOLHOZ_Marker.Models
             byte[] bytes = Encoding.Default.GetBytes(title);
             title = Encoding.UTF8.GetString(bytes);
 
-
-
             Title = title;
             Icon = iconName;
-
-            //GC.Collect();
         }
 
         private string getFileName(string uri)
@@ -102,56 +92,25 @@ namespace KOLHOZ_Marker.Models
 
         private string getResponse(string uri)
         {
-            //StringBuilder sb = new StringBuilder();
-            //byte[] buf = new byte[8192];
-            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-
-            //request.Proxy = null;
-            //request.Method = "GET";
-            //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            //Stream resStream = response.GetResponseStream();
-            //int count = 0;
-            //do
-            //{
-            //    count = resStream.Read(buf, 0, buf.Length);
-            //    if (count != 0)
-            //    {
-            //        sb.Append(Encoding.Default.GetString(buf, 0, count));
-            //    }
-            //}
-            //while (count > 0);
-            //return sb.ToString();
-
-
             WebClient wc = new WebClient();
             return wc.DownloadString(uri);
-
         }
 
         public static void DisableAdapter(string interfaceName)
         {
-                System.Diagnostics.ProcessStartInfo psi =
-                    new System.Diagnostics.ProcessStartInfo("netsh", "interface set interface \"" + interfaceName + "\" disable");
-                System.Diagnostics.Process p = new System.Diagnostics.Process();
-                psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                psi.UseShellExecute = true; 
-                psi.Verb = "runas";
-                p.StartInfo = psi;
-                p.Start();
+            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo("netsh", "interface set interface \"" + interfaceName + "\" disable");
+            System.Diagnostics.Process p = new System.Diagnostics.Process();
+            psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            psi.UseShellExecute = true; 
+            psi.Verb = "runas";
+            p.StartInfo = psi;
+            p.Start();
         }
         
         public static bool isExist(string href)
         {
-            //DisableAdapter("Hamachi");
-
             try
             {
-                //WebClient wc = new WebClient();
-                //string HTMLSource = wc.DownloadString(href);
-                //return true;
-
-
-
                 //Creating the HttpWebRequest
                 HttpWebRequest request = WebRequest.Create(href) as HttpWebRequest;
                 //Setting the Request method HEAD, you can also use GET too.

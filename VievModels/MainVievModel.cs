@@ -27,8 +27,6 @@ namespace KOLHOZ_Marker.VievModels
                 tags.Add(new TagModel(str, Tags_CollectionChanged));
             }
 
-
-
             Marks = new ObservableCollection<MarkModel>();
             var savedMarks = sm.getMarks();
 
@@ -59,9 +57,7 @@ namespace KOLHOZ_Marker.VievModels
             delete = new Command(deleteMark);
         }
 
-
-
-        private void Tags_CollectionChanged() // на лямбду помінять?
+        private void Tags_CollectionChanged()
         {
             RaisePropertyChanged("Marks");
         }
@@ -109,7 +105,6 @@ namespace KOLHOZ_Marker.VievModels
             }
             set { marks = value; }
         } 
-      
 
         private bool isFiltering;
         private string filterText;
@@ -125,7 +120,6 @@ namespace KOLHOZ_Marker.VievModels
         }
       
         public ObservableCollection<TagModel> tags;
-
         public ObservableCollection<TagModel> Tags
         {
             get
@@ -137,17 +131,6 @@ namespace KOLHOZ_Marker.VievModels
                 tags = value;
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void RaisePropertyChanged(string propertyName)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
 
         public Window main;
 
@@ -164,15 +147,10 @@ namespace KOLHOZ_Marker.VievModels
                 ResizeMode = ResizeMode.NoResize,
                 WindowStyle = WindowStyle.None,
                 DataContext = new MarkAddingVievModel()
-
-
             };
             if (dialog.ShowDialog() == true)
             {
-                Models.MarkModel newM = new MarkModel(this.Tags, this.Marks, (dialog.DataContext as MarkAddingVievModel).Title); //переробить від новий конструктор і скоротить
-                newM.Icon = (dialog.DataContext as MarkAddingVievModel).Icon;
-                newM.Href = (dialog.DataContext as MarkAddingVievModel).Href;
-                marks.Add(newM);
+                marks.Add(new MarkModel(this.Tags, this.Marks, (dialog.DataContext as MarkAddingVievModel).Title, (dialog.DataContext as MarkAddingVievModel).Href, (dialog.DataContext as MarkAddingVievModel).Icon));
             }
             
         }
@@ -198,7 +176,6 @@ namespace KOLHOZ_Marker.VievModels
         public Command EditTags { get { return editCommand; } }
         void editTags(object o)
         {
-
             string parName = o as string;
             if (parName != null)
             {
@@ -215,8 +192,6 @@ namespace KOLHOZ_Marker.VievModels
                             ResizeMode = ResizeMode.NoResize,
                             WindowStyle = WindowStyle.None,
                             DataContext = new TagEditVievModel(marks[i].SelectedTags)
-
-
                         };
                         if (dialog.ShowDialog() == true)
                         {
@@ -255,6 +230,16 @@ namespace KOLHOZ_Marker.VievModels
         {
             SaveManager sv = new SaveManager(@"tags.txt", @"marks.txt");
             sv.setSave(tags, marks);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
     }

@@ -53,7 +53,6 @@ namespace KOLHOZ_Marker.Models
                     }
                 }
                 SelectedTags = tmp;
-                //GC.Collect();
             }
         }
 
@@ -95,11 +94,6 @@ namespace KOLHOZ_Marker.Models
 
         public override string ToString()
         {
-            //string toReturn = "";
-
-            //toReturn += this.Title;
-
-
             StringBuilder sb = new StringBuilder("");
             sb.Append(this.Title);
             sb.Append("|");
@@ -120,11 +114,7 @@ namespace KOLHOZ_Marker.Models
             sb.Append(this.Icon);
             sb.Append("|");
 
-
             return sb.ToString();
-
         }
-
-
     }
 }

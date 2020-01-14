@@ -65,7 +65,6 @@ namespace KOLHOZ_Marker.Models
             }
         }
 
-
         public void setSave(ObservableCollection<TagModel> tags, ObservableCollection<MarkModel> marks)
         {
             using (StreamWriter sw = new StreamWriter(Tags))
@@ -84,6 +83,5 @@ namespace KOLHOZ_Marker.Models
                 }
             }
         }
-
     }
 }

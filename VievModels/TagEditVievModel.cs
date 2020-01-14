@@ -11,7 +11,6 @@ namespace KOLHOZ_Marker.VievModels
 {
     class TagEditVievModel : INotifyPropertyChanged
     {
-
         public TagEditVievModel(ObservableCollection<TagModel> tags)
         {
             ObservableCollection<TagModel> tmp = new ObservableCollection<TagModel>();
@@ -27,12 +26,6 @@ namespace KOLHOZ_Marker.VievModels
 
         ObservableCollection<TagModel> tags;
         public ObservableCollection<TagModel> Tags { get { return tags; } }
-
-
-
-
-
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void RaisePropertyChanged(string propertyName)
