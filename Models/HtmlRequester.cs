@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace KOLHOZ_Marker.Models
 {
@@ -21,27 +22,10 @@ namespace KOLHOZ_Marker.Models
             string iconName = AppDomain.CurrentDomain.BaseDirectory + getFileName(home);
 
             //якась магія, можна попробувать удалить
-            WebRequest.DefaultWebProxy = null;
-            //System.Net.ServicePointManager.Expect100Continue = false;
-            DisableAdapter("Hamachi");
-            //
+            //WebRequest.DefaultWebProxy = null;
 
-            //res = getResponse(adress);
-            //string title = Regex.Match(res, @"\<title\b[^>]*\>\s*(?<Title>[\s\S]*?)\</title\>", RegexOptions.IgnoreCase).Groups["Title"].Value;
-            //byte[] bytes = Encoding.Default.GetBytes(title);
-            //title = Encoding.UTF8.GetString(bytes);
-
-
-            //if (!File.Exists(iconName))
-            //{
-            //    using (WebClient client = new WebClient())
-            //    {
-            //        //client.DownloadFileAsync(new Uri(@"https://www.google.com/s2/favicons?domain=" + home); //хай буде, вдруг пригодиться
-            //        client.DownloadFile(new Uri(@"https://www.google.com/s2/favicons?domain=" + home), iconName);
-            //    }
-            //}
-
-
+            //DisableAdapter("Hamachi");
+           
             if (!File.Exists(iconName))
             {
                 using (WebClient client = new WebClient())
@@ -118,25 +102,30 @@ namespace KOLHOZ_Marker.Models
 
         private string getResponse(string uri)
         {
-            StringBuilder sb = new StringBuilder();
-            byte[] buf = new byte[8192];
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+            //StringBuilder sb = new StringBuilder();
+            //byte[] buf = new byte[8192];
+            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
 
-            request.Proxy = null;
-            request.Method = "GET";
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            Stream resStream = response.GetResponseStream();
-            int count = 0;
-            do
-            {
-                count = resStream.Read(buf, 0, buf.Length);
-                if (count != 0)
-                {
-                    sb.Append(Encoding.Default.GetString(buf, 0, count));
-                }
-            }
-            while (count > 0);
-            return sb.ToString();
+            //request.Proxy = null;
+            //request.Method = "GET";
+            //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            //Stream resStream = response.GetResponseStream();
+            //int count = 0;
+            //do
+            //{
+            //    count = resStream.Read(buf, 0, buf.Length);
+            //    if (count != 0)
+            //    {
+            //        sb.Append(Encoding.Default.GetString(buf, 0, count));
+            //    }
+            //}
+            //while (count > 0);
+            //return sb.ToString();
+
+
+            WebClient wc = new WebClient();
+            return wc.DownloadString(uri);
+
         }
 
         public static void DisableAdapter(string interfaceName)
@@ -153,56 +142,64 @@ namespace KOLHOZ_Marker.Models
         
         public static bool isExist(string href)
         {
-            //bool result = true;
             //DisableAdapter("Hamachi");
-
-            //try
-            //{
-            //    WebRequest webRequest = WebRequest.Create(href);
-            //    webRequest.Timeout = 500; // miliseconds
-            //    webRequest.Method = "HEAD";
-            //    webRequest.GetResponse();
-            //}
-            //catch
-            //{
-            //    result = false;
-            //}
-
-            //return result;
-
-            DisableAdapter("Hamachi");
-
-            //if (href.Contains("https://"))
-            //{
-            //    href = href.Remove(href.IndexOf("https://"), "https://".Length);
-            //}
-
-
-            //bool br = false;
-            //try
-            //{
-            //    IPHostEntry ipHost = Dns.GetHostEntry(href);
-            //    br = true;
-            //}
-            //catch (SocketException se)
-            //{
-            //    br = false;
-            //}
-            //return br;
-
 
             try
             {
-                WebClient wc = new WebClient();
-                string HTMLSource = wc.DownloadString(href);
-                return true;
+                //WebClient wc = new WebClient();
+                //string HTMLSource = wc.DownloadString(href);
+                //return true;
+
+
+
+                //Creating the HttpWebRequest
+                HttpWebRequest request = WebRequest.Create(href) as HttpWebRequest;
+                //Setting the Request method HEAD, you can also use GET too.
+                request.Method = "HEAD";
+                //Getting the Web Response.
+                HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+                //Returns TRUE if the Status code == 200
+                response.Close();
+                return (response.StatusCode == HttpStatusCode.OK);
             }
             catch (Exception)
             {
                 return false;
             }
         }
-    
+
+        private static Thread jammer;
+
+        public static void startJamming()
+        {
+            if (jammer == null)
+            {
+                jammer = new Thread(new ThreadStart(jamming));
+                jammer.Name = "Jammer";
+                jammer.Start();
+            }
+            else
+            {
+                if (jammer.ThreadState == ThreadState.Stopped)
+                {
+                    jammer.Resume();
+                }
+            }
+        }
+        public static void stopJamming()
+        {
+            if (jammer != null)
+            {
+                jammer.Suspend();
+            }
+        }
+
+        private static void jamming()
+        {
+            DisableAdapter("Hamachi");
+            Thread.Sleep(10000);
+        }
+
 
         public string Adress { get; set; }
         public string Title { get; set; }

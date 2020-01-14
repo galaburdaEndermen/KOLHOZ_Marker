@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KOLHOZ_Marker.VievModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,6 @@ namespace KOLHOZ_Marker
             this.DataContext = new VievModels.MainVievModel(this);
             
         }
-
         private bool IsToggle;
 
         private void btn_Click(object sender, RoutedEventArgs e)
@@ -80,6 +80,11 @@ namespace KOLHOZ_Marker
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            (this.DataContext as MainVievModel).set();
         }
     }
 }

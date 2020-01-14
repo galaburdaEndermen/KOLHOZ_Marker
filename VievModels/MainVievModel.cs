@@ -19,19 +19,41 @@ namespace KOLHOZ_Marker.VievModels
 
             this.main = main;
             tags = new ObservableCollection<TagModel>();
-            tags.Add(new TagModel("test1", Tags_CollectionChanged));
-            tags.Add(new TagModel("test2", Tags_CollectionChanged));
-            tags.Add(new TagModel("test3", Tags_CollectionChanged));
-            tags.Add(new TagModel("test4", Tags_CollectionChanged));
+            var sm = new SaveManager(@"tags.txt", @"marks.txt");
+            var savedTags = sm.getTags();
+
+            foreach (var str in savedTags)
+            {
+                tags.Add(new TagModel(str, Tags_CollectionChanged));
+            }
+
+
 
             Marks = new ObservableCollection<MarkModel>();
-            Marks.Add(new MarkModel(Tags, marks, "1"));
-            Marks.Add(new MarkModel(Tags, marks, "2"));
-            Marks.Add(new MarkModel(Tags, marks, "3"));
-         
-            isFiltering = false;
-            add_Mark = new Command(addMark);
+            var savedMarks = sm.getMarks();
 
+            foreach (var str in savedMarks)
+            {
+                string title = str.Split('|')[0];
+                string tags = str.Split('|')[1];
+                string href = str.Split('|')[2];
+                string icon = str.Split('|')[3];
+                //var tmp = new MarkModel(Tags, marks, title, href, @icon);
+                var tmp = new MarkModel(Tags, marks, title);
+                tmp.Href = href;
+                tmp.Icon = icon;
+
+                tmp.setSelected(tags);
+                marks.Add(tmp);
+
+                RaisePropertyChanged("Marks");
+            }
+
+
+
+            isFiltering = false;
+
+            add_Mark = new Command(addMark);
             openCommand = new Command(OpenPage);
             editCommand = new Command(editTags);
             delete = new Command(deleteMark);
@@ -218,6 +240,7 @@ namespace KOLHOZ_Marker.VievModels
                     if (marks[i].toString == parName)
                     {
                         marks.RemoveAt(i);
+                      
                     }
                     else
                     {
@@ -226,5 +249,13 @@ namespace KOLHOZ_Marker.VievModels
                 }
             }
         }
+
+
+        public void set()
+        {
+            SaveManager sv = new SaveManager(@"tags.txt", @"marks.txt");
+            sv.setSave(tags, marks);
+        }
+
     }
 }

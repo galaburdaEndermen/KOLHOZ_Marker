@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:KOLHOZ_Marker"
         
         Title="MainWindow" Height="450" Width="800" 
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded" Closing="Window_Closing">
 
     <Grid>
         <Grid Panel.ZIndex="0" Background="AliceBlue">

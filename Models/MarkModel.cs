@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,19 +16,20 @@ namespace KOLHOZ_Marker.Models
 {
     class MarkModel
     {
+        public MarkModel(ObservableCollection<TagModel> Tags, ObservableCollection<MarkModel> Marks, string title, string href, string icon) : this(Tags, Marks, title)
+        {
+            Href = href;
+            Icon = icon;
+        }
 
         public MarkModel(ObservableCollection<TagModel> Tags, ObservableCollection<MarkModel> Marks, string title)
         {
-            Icon = @"pack://application:,,,/Resourses\WhiteTest.png";
             Title = title;
-            Href = @"https://www.google.com.ua";
-
             this.Tags = Tags;
             this.marks = Marks;
             SelectedTags = new ObservableCollection<TagModel>();
             Tags_CollectionChanged(null, null);
             this.Tags.CollectionChanged += Tags_CollectionChanged;
-            
         }
       
         private void Tags_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -55,7 +57,8 @@ namespace KOLHOZ_Marker.Models
             }
         }
 
-        public string Icon { get; set; }
+        public string Icon { get { return icon; } set { icon = value;} }
+        public string icon;
         public string Title { get; set; }
         public string Href { get; set; }
         public ObservableCollection<TagModel> Tags { get; set; }
@@ -77,9 +80,51 @@ namespace KOLHOZ_Marker.Models
 
         public string toString { get { return this.ToString(); } }
 
+        public void setSelected(string str)
+        {
+            var tags = str.Split('#');
+
+            foreach(var tag in tags)
+            {
+                foreach(var r in SelectedTags.Where(x => x.TagName == tag))
+                {
+                    r.IsCheked = true;
+                }
+            }
+        }
+
         public override string ToString()
         {
-            return Title + Href;
+            //string toReturn = "";
+
+            //toReturn += this.Title;
+
+
+            StringBuilder sb = new StringBuilder("");
+            sb.Append(this.Title);
+            sb.Append("|");
+
+            foreach (var tag in SelectedTags)
+            {
+                if (tag.IsCheked)
+                {
+                    sb.Append(tag.TagName);
+                    sb.Append("#");
+                }
+            }
+            sb.Append("|");
+
+            sb.Append(this.Href);
+            sb.Append("|");
+
+            sb.Append(this.Icon);
+            sb.Append("|");
+
+
+            return sb.ToString();
+
         }
+
+
     }
 }

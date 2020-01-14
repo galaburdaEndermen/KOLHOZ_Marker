@@ -44,19 +44,22 @@ namespace KOLHOZ_Marker.VievModels
             {
                 href = value; 
                 RaisePropertyChanged("Href");
-               
+
+                HtmlRequester.startJamming();
                 if (HtmlRequester.isExist(href))
                 {
+                    
                     Exist = true;
                     HtmlRequester request = new HtmlRequester(href);
                     Title = request.Title;
                     Icon = request.Icon;
+                   
                 }
                 else
                 {
                     Exist = false;
                 }
-
+                HtmlRequester.stopJamming();
             }
         }
 
