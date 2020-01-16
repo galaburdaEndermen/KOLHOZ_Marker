@@ -6,7 +6,7 @@
         
         xmlns:local="clr-namespace:KOLHOZ_Marker"
         
-        Title="MainWindow" Height="450" Width="800" 
+        Title="MainWindow" Height="450" Width="800" WindowState="Maximized"
         Loaded="Window_Loaded" Closing="Window_Closing">
 
     <Grid>
@@ -259,6 +259,45 @@
                                     <Trigger Property="IsMouseOver" Value="False">
                                         <Setter Property="Opacity" Value="0.8"></Setter>
                                         <Setter Property="Background" Value="{StaticResource MidBrsh}"></Setter>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Opacity" Value="1.0"></Setter>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+
+                            </ControlTemplate>
+
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+                <Style x:Key="SettingsButtonStyle" TargetType="Button">
+                    <Setter Property="Background" Value="{StaticResource MidBrsh}"></Setter>
+                    <Setter Property="Opacity" Value="0.9"></Setter>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                    <Setter Property="Margin" Value="5"></Setter>
+
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+
+                            <ControlTemplate TargetType="Button">
+
+                                <Border 
+                                Name = "Brd" 
+                                CornerRadius="5"
+                                Background="{TemplateBinding Background}">
+                                    <ContentPresenter
+                                    Margin="5"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                    </ContentPresenter>
+                                </Border>
+
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="False">
+                                        <Setter Property="Opacity" Value="0.8"></Setter>
+                                        <Setter Property="Background" Value="{StaticResource LightBrsh}"></Setter>
                                     </Trigger>
                                     <Trigger Property="IsPressed" Value="True">
                                         <Setter Property="Opacity" Value="1.0"></Setter>
@@ -650,6 +689,8 @@
             <Button Style="{StaticResource AddButtonStyle}" Content="{StaticResource Add}" Grid.Column ="1" Grid.Row="2" Command="{Binding AddMark}">
 
             </Button>
+
+            <Button Style="{StaticResource SettingsButtonStyle}" Content="{StaticResource Cog}" Grid.Column="0" Grid.Row="2" Command="{Binding Setings}"></Button>
 
         </Grid>
     </Grid>

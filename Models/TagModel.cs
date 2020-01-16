@@ -17,16 +17,14 @@ namespace KOLHOZ_Marker.Models
             set { isCheked = value; Checked(); }
         }
 
-        public TagModel(string s, TagStateHandler h)
+        public TagModel(string s)
         {
-            Checked = h;
             TagName = s;
             IsCheked = false; 
         }
 
         public TagModel(TagModel another) // copy
         {
-            this.Checked = another.Checked;
             this.TagName = another.TagName;
            
             IsCheked = false;
@@ -38,6 +36,6 @@ namespace KOLHOZ_Marker.Models
         }
 
         public delegate void TagStateHandler();
-        public event TagStateHandler Checked;
+        public static event TagStateHandler Checked;
     }
 }

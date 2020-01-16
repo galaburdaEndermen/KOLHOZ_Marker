@@ -22,9 +22,10 @@ namespace KOLHOZ_Marker.VievModels
             var sm = new SaveManager(@"tags.txt", @"marks.txt");
             var savedTags = sm.getTags();
 
+            TagModel.Checked += Tags_CollectionChanged;
             foreach (var str in savedTags)
             {
-                tags.Add(new TagModel(str, Tags_CollectionChanged));
+                tags.Add(new TagModel(str));
             }
 
             Marks = new ObservableCollection<MarkModel>();
@@ -55,6 +56,7 @@ namespace KOLHOZ_Marker.VievModels
             openCommand = new Command(OpenPage);
             editCommand = new Command(editTags);
             delete = new Command(deleteMark);
+            setings = new Command(startSetings);
         }
 
         private void Tags_CollectionChanged()
@@ -223,6 +225,27 @@ namespace KOLHOZ_Marker.VievModels
                     }
                 }
             }
+        }
+        
+        private Command setings;
+        public Command Setings { get { return setings; } }
+        private void startSetings(object o)
+        {
+            Vievs.Setings dialog = new Vievs.Setings
+            {
+                Owner = main,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                Height = 350,
+                Width = 400,
+                ResizeMode = ResizeMode.NoResize,
+                WindowStyle = WindowStyle.None,
+                DataContext = new SetingsVievModel(tags)
+            };
+            dialog.ShowDialog();
+            //tags.Add(new TagModel("null", Tags_CollectionChanged));
+            //tags.Remove(tags.Last<TagModel>());
+
+            //RaisePropertyChanged("Tags");
         }
 
 
